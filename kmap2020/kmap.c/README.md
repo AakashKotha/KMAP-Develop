@@ -28,5 +28,8 @@ The KMAP (Kinetic Modeling and Analysis Package) library provides a suite of cod
    - **Description**: A specialized model accounting for the dual-blood input function in liver tissue, where both hepatic artery and portal vein are considered.
    - **Parameters**: \( K_1 \), \( k_2 \), \( k_3 \), \( k_4 \), \( K_a \), \( f_a \), \( V_b \).
 
+### For Further Instructions
 
+To learn more about the detailed compilation instructions and how to use the files in this package, refer to the `README` inside the `KMAP_source_files` directory and `README` inside the `KMAP_mex_files` directory.
 
+These files provide comprehensive guidance on compiling and executing the source and MEX files within MATLAB, along with additional details about the optimization methods employed.
