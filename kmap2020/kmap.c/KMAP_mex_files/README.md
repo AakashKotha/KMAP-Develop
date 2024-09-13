@@ -101,6 +101,8 @@ The usage command should be run within the MATLAB environment after the MEX file
 - `p`: Estimated parameters.
 - `c`: Fitted curve.
 
+### MEX Files
+
 1. **kfit_1tcm_mex.cpp**
    - **Purpose**: Implements the fitting of a one-tissue compartmental model (1TCM) using the Levenberg-Marquardt algorithm.
 
@@ -174,6 +176,8 @@ OpenMP (OMP) is also employed in several MEX files to leverage parallel processi
 ### Outputs:
 - `p`: Estimated parameters.
 - `c`: Fitted curve.
+
+### MEX Files
 
 1. **kfit_1tcm_mex_omp.cpp**
    - **Purpose**: Implements the fitting of a one-tissue compartmental model (1TCM) using the Levenberg-Marquardt algorithm with OpenMP for running in MATLAB.
