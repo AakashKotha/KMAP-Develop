@@ -69,6 +69,7 @@ For example, to use the `kfit_2tcm.m` wrapper, you can call the function like th
 
 ```matlab
 [k, cfit] = kfit_2tcm(ct, cp, scant, k0, opt);
+```
 
 Ensure that the inputs are prepared according to the function specifications (refer to each function’s help documentation in MATLAB).
 
