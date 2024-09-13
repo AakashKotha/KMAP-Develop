@@ -87,11 +87,15 @@ These optimization and modeling techniques are integral to the KMAP library's ab
      - **Key Functions**:
        - **Convolution Operations**:
          - `kconv_exp`: Performs the convolution of the input function with a single exponential function, a key building block for more complex compartmental models.
+       - **Time Delay Correction**:
+         - `time_delay_tac`: Computes time-delayed TAC curves by shifting the TAC in time and interpolating values based on the specified delay.
+         - `time_delay_jac`: Computes the Jacobian (gradient) for time delay correction, allowing for the calculation of sensitivity with respect to time delay.
        - **Other Utility Functions**:
          - `frame`: Computes the average activity within specified time frames.
          - `vecnorm2`, `vecnormw`: Helper functions for vector norm calculations.
        - **Parameter Handling**:
          - `setkin`, `getkin`: Functions for defining and handling sensitive parameters during optimization.  
+
        
 
 ### 3. **MEX Files for MATLAB**
