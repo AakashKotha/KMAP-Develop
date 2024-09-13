@@ -1,20 +1,18 @@
 #include "mex.h"
 #include "kinlib.h"
-#include <omp.h>
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // This file implements the fitting of a liver kinetic model using the 
-// Levenberg-Marquardt algorithm with OpenMP parallelization, within the MATLAB
-// environment.
+// Levenberg-Marquardt algorithm within the MATLAB environment.
 //
 // Usage: 
 // kfit_liver(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
 //
 // Compilation Instruction:
-// mex kfit_liver_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_liver_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
+// mex kfit_liver_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_liver
 //
-// This will produce a MEX file named 'kfit_liver_mex_omp', which you can call from 
-// MATLAB as kfit_liver_mex_omp(...) with the same arguments as described above.
+// This will produce a MEX file named 'kfit_liver', which you can call from 
+// MATLAB as kfit_liver(...) with the same arguments as described above.
 //
 // Input parameters:
 // - tac: Time activity curve (TAC) data.
@@ -44,7 +42,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     int psens[8];
     double *temp;
     int maxit; 
-    double *p, *c;
+    double *p, *c, *cj, *wj, *pj, *cfit;
     double *plb, *pub;
     double td;
     KMODEL_T km;
@@ -109,65 +107,20 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
         }
     }
 
-    // Handle weights (w)
-    if (nw == 1) {
-        w = (double*)malloc(sizeof(double) * num_frm * num_vox);
-        for (i = 0; i < num_frm; i++) {
-            for (j = 0; j < num_vox; j++) {
-                w[i + j * num_frm] = w1[i];
-            }
-        }    
-    } 
-    else {
-        w = w1;
-    }
-  
-    // Print the total number of threads available
-    i = omp_get_max_threads();
-    printf("Total number of threads: %d\n", i);
-   
-    #pragma omp parallel
-    {
-        int tid, m;
-        double *cj, *wj, *pj, *cfit;
-        cj = (double*)malloc(sizeof(double) * num_frm);
-        wj = (double*)malloc(sizeof(double) * num_frm);
-        pj = (double*)malloc(sizeof(double) * num_par);
-        cfit = (double*)malloc(sizeof(double) * num_frm);
-  
-        tid = omp_get_thread_num();  
-        // printf("This is thread #%d \n", tid);
-    
-        #pragma omp for nowait
-        // Voxel-wise fitting
-        for (j = 0; j < num_vox; j++) {
-            for (m = 0; m < num_frm; m++) {
-                cj[m] = tac[m + j * num_frm];
-                wj[m] = w[m + j * num_frm];
-            }
-    
-            for (m = 0; m < num_par; m++) {
-                pj[m] = p[m + j * num_par];
-            }
-    
-            kmap_levmar(cj, wj, num_frm, pj, num_par, &km, tac_eval, jac_eval, plb, pub, psens, maxit, cfit);
-                
-            for (m = 0; m < num_frm; m++) {
-                c[m + j * num_frm] = cfit[m];
-            }
-            for (m = 0; m < num_par; m++) {
-                p[m + j * num_par] = pj[m];
-            }
+    // Voxel-wise fitting
+    for (j = 0; j < num_vox; j++) {
+        // Extract the current voxel's TAC and weights
+        cj = tac + j * num_frm;
+        if (nw == num_vox) {
+            wj = w + j * num_frm;
+        } else {
+            wj = w;    
         }
+        pj = p + j * num_par;
+        cfit = c + j * num_frm;
 
-        // Free allocated memory within each thread
-        if (cj) free(cj);
-        if (wj) free(wj);
-        if (pj) free(pj);
-        if (cfit) free(cfit);  
+        // Perform Levenberg-Marquardt fitting for the current voxel
+        kmap_levmar(cj, wj, num_frm, pj, num_par, &km, tac_eval, jac_eval, plb, pub, 
+                    psens, maxit, cfit);
     }
-
-    // Free memory allocated for weights if necessary
-    if ((w) && (nw == 1)) free(w);
-
 }
