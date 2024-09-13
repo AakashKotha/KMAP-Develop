@@ -126,28 +126,28 @@ The usage command should be run within the MATLAB environment after the MEX file
      - `c`: Computed time activity curve (TAC).
      - `s`: Jacobian matrix (if requested).
        
-1. **ktac_1t3p_mex.cpp**
+1. **ktac_1tcm_mex.cpp**
    - **Purpose**: Implements the computation of the time activity curve (TAC) and its Jacobian for a one-tissue compartmental model (1TCM).
 
    - **Compilation Instruction**:
      ```matlab
-     mex ktac_1t3p_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output ktac_1t3p
+     mex ktac_1tcm_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output ktac_1tcm
      ```
    - **Usage**:
      ```matlab
-     ktac_1t3p(par, scant, blood, wblood, dk, td)
+     ktac_1tcm(par, scant, blood, wblood, dk, td)
      ```
 
-2. **ktac_2t5p_mex.cpp**
+2. **ktac_2tcm_mex.cpp**
    - **Purpose**: Implements the computation of the time activity curve (TAC) and its Jacobian for a two-tissue compartmental model (2TCM).
 
    - **Compilation Instruction**:
      ```matlab
-     mex ktac_2t5p_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output ktac_2t5p
+     mex ktac_2tcm_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output ktac_2tcm
      ```
    - **Usage**:
      ```matlab
-     ktac_2t5p(par, scant, blood, wblood, dk, td)
+     ktac_2tcm(par, scant, blood, wblood, dk, td)
      ```
 
 3. **ktac_liver_mex.cpp**
@@ -194,28 +194,28 @@ The usage command should be run within the MATLAB environment after the MEX file
      - `p`: Estimated parameters.
      - `c`: Fitted curve.
        
-1. **kfit_1t3p_mex.cpp**
+1. **kfit_1tcm_mex.cpp**
    - **Purpose**: Implements the fitting of a one-tissue compartmental model (1TCM) using the Levenberg-Marquardt algorithm.
 
    - **Compilation Instruction**:
      ```matlab
-     mex kfit_1t3p_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1t3p
+     mex kfit_1tcm_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1tcm
      ```
    - **Usage**:
      ```matlab
-     kfit_1t3p(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
+     kfit_1tcm(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
      ```
 
-2. **kfit_2t5p_mex.cpp**
+2. **kfit_2tcm_mex.cpp**
    - **Purpose**: Implements the fitting of a two-tissue compartmental model (2TCM) using the Levenberg-Marquardt algorithm for running in MATLAB.
 
    - **Compilation Instruction**:
      ```matlab
-     mex kfit_2t5p_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2t5p
+     mex kfit_2tcm_mex.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2tcm
      ```
    - **Usage**:
      ```matlab
-     kfit_2t5p(tac, w, scant, blood, wblood, dk, pinit, plb, pub, psens, maxit, td)
+     kfit_2tcm(tac, w, scant, blood, wblood, dk, pinit, plb, pub, psens, maxit, td)
      ```
 
 3. **kfit_liver_mex.cpp**
@@ -268,38 +268,38 @@ OpenMP (OMP) is also employed in several MEX files to leverage parallel processi
      - `p`: Estimated parameters.
      - `c`: Fitted curve.
 
-1. **kfit_1t3p_mex_omp.cpp**
+1. **kfit_1tcm_mex_omp.cpp**
    - **Purpose**: Implements the fitting of a one-tissue compartmental model (1TCM) using the Levenberg-Marquardt algorithm with OpenMP for running in MATLAB.
 
    - **Compilation Instructions**:
      - **Windows**:
        ```matlab
-       mex kfit_1t3p_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1t3p_mex_omp CXXFLAGS="$CXXFLAGS -fopenmp" LDFLAGS="$LDFLAGS -fopenmp"
+       mex kfit_1tcm_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1tcm_mex_omp CXXFLAGS="$CXXFLAGS -fopenmp" LDFLAGS="$LDFLAGS -fopenmp"
        ```
      - **Linux**:
        ```matlab
-       mex kfit_1t3p_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1t3p_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
+       mex kfit_1tcm_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_1tcm_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
        ```
    - **Usage**:
      ```matlab
-     kfit_1t3p_mex_omp(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
+     kfit_1tcm_mex_omp(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
      ```
 
-2. **kfit_2t5p_mex_omp.cpp**
-   - **Purpose**: Implements the fitting of a two-tissue kinetic model (2T5P) using the Levenberg-Marquardt algorithm with OpenMP for parallel processing in MATLAB.
+2. **kfit_2tcm_mex_omp.cpp**
+   - **Purpose**: Implements the fitting of a two-tissue kinetic model (2TCM) using the Levenberg-Marquardt algorithm with OpenMP for parallel processing in MATLAB.
    
    - **Compilation Instructions**:
      - **Windows**:
        ```matlab
-       mex kfit_2t5p_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2t5p_mex_omp CXXFLAGS="$CXXFLAGS -fopenmp" LDFLAGS="$LDFLAGS -fopenmp"
+       mex kfit_2tcm_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2tcm_mex_omp CXXFLAGS="$CXXFLAGS -fopenmp" LDFLAGS="$LDFLAGS -fopenmp"
        ```
      - **Linux**:
        ```matlab
-       mex kfit_2t5p_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2t5p_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
+       mex kfit_2tcm_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_2tcm_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
        ```
    - **Usage**:
      ```matlab
-     kfit_2t5p_mex_omp(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
+     kfit_2tcm_mex_omp(tac, w, scant, blood, wblood, dk, pinit, lb, ub, psens, maxit, td)
      ```
 
 3. **kfit_liver_mex_omp.cpp**
@@ -331,4 +331,3 @@ OpenMP (OMP) is also employed in several MEX files to leverage parallel processi
        ```matlab
        mex kfit_srtm_mex_omp.cpp kinlib_models.cpp kinlib_optimization.cpp kinlib_common.cpp -output kfit_srtm_mex_omp CXXFLAGS="\$CXXFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"
        ```
-
