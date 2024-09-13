@@ -81,7 +81,6 @@ These optimization and modeling techniques are integral to the KMAP library's ab
        - **Optimization**:
          - `kmap_levmar`: Implements the Levenberg-Marquardt algorithm to fit a kinetic model to the TAC data by minimizing the difference between measured and modeled TACs.
          - `BoundQuadCD`: Implements the bounded coordinate descent method for quadratic optimization under constraints.
-         - `lema_gsn`: Implements the Levenberg-Marquardt algorithm with additional constraints. [to be deleted]
 
    - **`kinlib_common.cpp`**:
      - **Purpose**: Contains common functions used across different models and optimizations.

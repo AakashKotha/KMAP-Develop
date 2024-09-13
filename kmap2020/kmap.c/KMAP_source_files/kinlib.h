@@ -194,17 +194,6 @@ double vecnorm2(double *x, int num);
 double vecnormw(double *w, double *x, int num);
 
 /*
- * lema_gsn
- * 
- * Implements the Levenberg-Marquardt algorithm with additional constraints 
- * for minimizing the least squares problem.
- */
-void lema_gsn(double *w, double *y, double *f, int num_y, double *p, int num_p, 
-              void *param, void (*func)(double *, void *, double *),
-              void (*jacf)(double *, void *, double *, int *, double *),
-              double *plb, double *pub, int *psens, int maxit);
-
-/*
  * BoundQuadCD
  * 
  * Implements a coordinate descent algorithm for solving the quadratic 

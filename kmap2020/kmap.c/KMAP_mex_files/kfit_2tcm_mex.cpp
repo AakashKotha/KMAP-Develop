@@ -117,8 +117,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
             wj = w;    
         }
         pj = p + j * num_par;
-    
         cfit = c + j * num_frm;
-        lema_gsn(wj, cj, cfit, num_frm, pj, num_par, &km, tac_eval, jac_eval, plb, pub, psens, maxit);
+
+        // Perform Levenberg-Marquardt fitting
+        kmap_levmar(cj, wj, num_frm, pj, num_par, &km, tac_eval, jac_eval, plb, pub, psens, maxit, cfit);
     }
 }
+
+
+
