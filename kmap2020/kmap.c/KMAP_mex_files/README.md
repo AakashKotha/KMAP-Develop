@@ -6,7 +6,7 @@ Each MEX file is accompanied by detailed instructions on its usage, input, outpu
 
 ## Files in This Folder
 
-- **Precompiled MEX Files**: Precompiled MEX binaries for Windows (`*.mexw64`), Linux (`*.mexa64`), and macOS (`*.mexmaci64`) are available in three separate folders: `Precompiled Windows-based Files`, `Precompiled Linux-based Files`, and `Precompiled Mac-based Files`. Go to the respective folder depending on your system to access the binaries for direct use in MATLAB.
+- **Precompiled MEX Files**: Precompiled MEX binaries for Windows (`*.mexw64`), Linux (`*.mexa64`), and macOS (`*.mexmaci64`) are available in three separate folders: `Precompiled_Windows_Binaries`, `Precompiled_Linux_Binaries`, and `Precompiled_MacOS_Binaries`. Go to the respective folder depending on your system to access the binaries for direct use in MATLAB.
 - **Source Code Files**: MEX source files (`*.cpp`) that implement the kinetic models in conjunction with the core source files from the `KMAP_source_files` folder.
 
 ### Compilation Instruction:
