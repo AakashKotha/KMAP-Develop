@@ -2,16 +2,18 @@
 
 This folder contains MEX files, along with their source code, that allow for running the KMAP library in MATLAB. These files enable fitting and generating time activity curves for kinetic models using the Levenberg-Marquardt algorithm and other advanced optimization methods. Precompiled MEX binaries are also included and can be used directly in MATLAB without recompilation, provided they are compatible with your system architecture.
 
+**Important:** Before compiling any of the MEX files, ensure that all required source files (`kinlib.h`, `kinlib_common.cpp`, `kinlib_models.cpp`, `kinlib_optimization.cpp`) from the `KMAP_source_files` directory are placed in the same directory as the MEX files.
+
 Each MEX file is accompanied by detailed instructions on its usage, input, output, and compilation. Please refer to the comments within each MEX source file (`*.cpp`) for precise information on how to work with these files.
 
 ## Files in This Folder
 
-- **MEX Files**: Precompiled MEX binaries for Windows (`*.mexw64`), Linux (`*.mexa64`), and macOS (`*.mexmaci64`) to be used directly in MATLAB.
+- **Precompiled MEX Files**: Precompiled MEX binaries for Windows (`*.mexw64`), Linux (`*.mexa64`), and macOS (`*.mexmaci64`) are available in three separate folders: `Precompiled Windows-based Files`, `Precompiled Linux-based Files`, and `Precompiled Mac-based Files`. Go to the respective folder depending on your system to access the binaries for direct use in MATLAB.
 - **Source Code Files**: MEX source files (`*.cpp`) that implement the kinetic models in conjunction with the core source files from the `KMAP_source_files` folder.
 
 ### Compilation Instruction:
 
-The compilation command should be run in the MATLAB Command Window or a terminal/shell where you have access to the MATLAB mex compiler. This command compiles the C++ source code into a MEX file that can be executed within MATLAB.
+The compilation command should be run in the MATLAB Command Window or a terminal/shell where you have access to the MATLAB `mex` compiler. This command compiles the C++ source code into a MEX file that can be executed within MATLAB.
 
 ### Usage:
 
